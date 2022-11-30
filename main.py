@@ -46,6 +46,8 @@ class TicTacToe:
                 self.print_board()
                 break
 
+        print('Game over!')
+
     def place_mark(self):
         while True:
             spot = input('Place mark (row:place): ')
@@ -78,25 +80,15 @@ class TicTacToe:
             count_marks(row)
 
         # Check columns for win
-        for column_count in range(3):
-            column = []
-            for row_count in range(3):
-                column.append(self.board[row_count][column_count])
-
-            count_marks(column)
+        for column in range(3):
+            column_marks = [self.board[row][column] for row in range(3)]
+            count_marks(column_marks)
 
         # Check diagonal for win
-        top_left_bottom_right = []
-        for spot in range(3):
-            top_left_bottom_right.append(self.board[spot][spot])
-
+        top_left_bottom_right = [self.board[spot][spot] for spot in range(3)]
         count_marks(top_left_bottom_right)
 
-        top_right_bottom_left = []
-        for row in range(3):
-            for spot in range(2, -1, -1):
-                top_right_bottom_left.append(self.board[row][spot])
-
+        top_right_bottom_left = [self.board[spot][2 - spot] for spot in range(3)]
         count_marks(top_right_bottom_left)
 
 
